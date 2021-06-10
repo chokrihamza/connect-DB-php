@@ -29,18 +29,29 @@ if ($conn->query($sql) === true) {
 // create tabel using sql
 
 // sql to create table
-$sql = "CREATE TABLE connect.MyGuests (
-  id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  firstname VARCHAR(30) NOT NULL,
-  lastname VARCHAR(30) NOT NULL,
-  email VARCHAR(50),
-  reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-  )";
+// $sql = "CREATE TABLE connect.MyGuests (
+//   id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+//   firstname VARCHAR(30) NOT NULL,
+//   lastname VARCHAR(30) NOT NULL,
+//   email VARCHAR(50),
+//   reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+//   )";
+
+// if ($conn->query($sql) === TRUE) {
+//   echo "Table MyGuests created successfully";
+// } else {
+//   echo "Error creating table: " . $conn->error;
+// }
+
+//insert data to mysql using mysqli and pdo
+
+$sql = "INSERT INTO connect.MyGuests(firstname,lastname,email)";
+$sql .= " VALUES ('jhon','doe','jhondoe0123@gmail.com') ";
 
 if ($conn->query($sql) === TRUE) {
-  echo "Table MyGuests created successfully";
+  echo "New record created successfully";
 } else {
-  echo "Error creating table: " . $conn->error;
+  echo "Error" . $sql . "</br>" . $conn->error;
 }
 
 $conn->close();
