@@ -30,6 +30,8 @@ try {
   // use exec() because no results are returned
   $conn->exec($sql);
   echo "New record created successfully";
+  $last_id = $conn->lastInsertId();
+  echo "New record created successfully. Last inserted ID is: " . $last_id;
 } catch (PDOException $e) {
   echo $sql . "</br>" . $e->getMessage();
 }

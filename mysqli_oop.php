@@ -49,9 +49,16 @@ $sql = "INSERT INTO connect.MyGuests(firstname,lastname,email)";
 $sql .= " VALUES ('jhon','doe','jhondoe0123@gmail.com') ";
 
 if ($conn->query($sql) === TRUE) {
+  //  get id of the last inserted id
   echo "New record created successfully";
+  $last_id = $conn->insert_id;
+  echo "the last inserted id is:  $last_id";
 } else {
   echo "Error" . $sql . "</br>" . $conn->error;
 }
+
+
+
+
 
 $conn->close();
