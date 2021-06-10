@@ -21,5 +21,10 @@ if ($connect->query($sql) === true) {
 } else {
   echo "Error creating DB" . $connect->error;
 }
-
+$sql = "DROP DATABASE IF EXISTS connect";
+if ($connect->query($sql) === true) {
+  echo "data base droped";
+} else {
+  echo "Error creating DB" . $connect->error;
+}
 $connect->close();
