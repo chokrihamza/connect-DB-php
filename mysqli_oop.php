@@ -72,28 +72,46 @@ if ($conn->connect_error) {
 
 
 /// mysql prepare statment
-$stmt = $conn->prepare("INSERT INTO connect.myguests(firstname,lastname,email)
-VALUES(?,?,?);
-");
-$stmt->bind_param('sss', $firstname, $lastname, $email);
-// set parameters and execute
-$firstname = "aaa";
-$lastname = "aaa";
-$email = "aaa@example.com";
-$stmt->execute();
+// $stmt = $conn->prepare("INSERT INTO connect.myguests(firstname,lastname,email)
+// VALUES(?,?,?);
+// ");
+// $stmt->bind_param('sss', $firstname, $lastname, $email);
+// // set parameters and execute
+// $firstname = "aaa";
+// $lastname = "aaa";
+// $email = "aaa@example.com";
+// $stmt->execute();
 
-$firstname = "bbb";
-$lastname = "bbb";
-$email = "bbb@example.com";
-$stmt->execute();
+// $firstname = "bbb";
+// $lastname = "bbb";
+// $email = "bbb@example.com";
+// $stmt->execute();
 
-$firstname = "ccc";
-$lastname = "ccc";
-$email = "ccc@example.com";
-$stmt->execute();
+// $firstname = "ccc";
+// $lastname = "ccc";
+// $email = "ccc@example.com";
+// $stmt->execute();
 
-echo "New records created successfully";
+// echo "New records created successfully";
 
-$stmt->close();
+// $stmt->close();
+
+// select data
+
+$sql = "SELECT * FROM connect.myguests";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+  echo "<table style='border-collapse: collapse;border: 1px solid black;'>";
+  while ($row = $result->fetch_assoc()) {
+
+    echo "<tr style='border: 1px solid #ddd;'><td style='border: 2px solid #ddd;' >id: {$row['id']}</td>
+<td style='border: 2px solid #ddd;'>Name: {$row['firstname']}</td>
+<td style='border: 2px solid #ddd;'>{$row['lastname']}</td>
+<td style='border: 2px solid #ddd;'>email: {$row['email']}</td></tr>";
+  }
+  echo "</table>";
+} else {
+  echo "0 results";
+}
 
 $conn->close();
