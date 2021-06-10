@@ -21,13 +21,13 @@ if (mysqli_query($connect, $sql)) {
   echo "Error creating DB" . mysqli_error($connect);
 }
 
-$sql = "DROP DATABASE IF EXISTS connect";
+// $sql = "DROP DATABASE IF EXISTS connect";
 
-if (mysqli_query($connect, $sql)) {
-  echo "data base droped";
-} else {
-  echo "Erro drop db" . mysqli_error($connect);
-}
+// if (mysqli_query($connect, $sql)) {
+//   echo "data base droped";
+// } else {
+//   echo "Erro drop db" . mysqli_error($connect);
+// }
 
 
 
