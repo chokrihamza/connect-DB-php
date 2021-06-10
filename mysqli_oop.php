@@ -45,33 +45,55 @@ if ($conn->connect_error) {
 
 //insert data to mysql using mysqli and pdo
 
-$sql =
-  "INSERT INTO connect.MyGuests(firstname,lastname,email)
- VALUES ('jhon','doe','jhondoe0123@gmail.com');SELECT LAST_INSERT_ID();";
-$sql .=
-  "INSERT INTO connect.MyGuests(firstname,lastname,email)
- VALUES ('alex','smith','alexsmith0123@gmail.com');SELECT LAST_INSERT_ID();";
-$sql .=
-  "INSERT INTO connect.MyGuests(firstname,lastname,email)
- VALUES ('ameelka','smirnova','ameelkasmirnova@gmail.com');SELECT LAST_INSERT_ID()";
+// $sql =
+//   "INSERT INTO connect.MyGuests(firstname,lastname,email)
+//  VALUES ('jhon','doe','jhondoe0123@gmail.com');SELECT LAST_INSERT_ID();";
+// $sql .=
+//   "INSERT INTO connect.MyGuests(firstname,lastname,email)
+//  VALUES ('alex','smith','alexsmith0123@gmail.com');SELECT LAST_INSERT_ID();";
+// $sql .=
+//   "INSERT INTO connect.MyGuests(firstname,lastname,email)
+//  VALUES ('ameelka','smirnova','ameelkasmirnova@gmail.com');SELECT LAST_INSERT_ID()";
 
-// isert multiple data
-/*$conn->query($sql) === TRUE*/
-if ($conn->multi_query($sql) === true) {
-  do {
-    if ($result = $conn->store_result()) {
-      while ($row = $result->fetch_row()) {
-        var_dump($row);
-      }
-    }
-  } while ($conn->next_result());
-  
-} else {
-  echo "Error" . $sql . "</br>" . $conn->error;
-}
+// // isert multiple data
+// /*$conn->query($sql) === TRUE*/
+// if ($conn->multi_query($sql) === true) {
+//   do {
+//     if ($result = $conn->store_result()) {
+//       while ($row = $result->fetch_row()) {
+//         var_dump($row);
+//       }
+//     }
+//   } while ($conn->next_result());
 
-
+// } else {
+//   echo "Error" . $sql . "</br>" . $conn->error;
+// }
 
 
+/// mysql prepare statment
+$stmt = $conn->prepare("INSERT INTO connect.myguests(firstname,lastname,email)
+VALUES(?,?,?);
+");
+$stmt->bind_param('sss', $firstname, $lastname, $email);
+// set parameters and execute
+$firstname = "aaa";
+$lastname = "aaa";
+$email = "aaa@example.com";
+$stmt->execute();
+
+$firstname = "bbb";
+$lastname = "bbb";
+$email = "bbb@example.com";
+$stmt->execute();
+
+$firstname = "ccc";
+$lastname = "ccc";
+$email = "ccc@example.com";
+$stmt->execute();
+
+echo "New records created successfully";
+
+$stmt->close();
 
 $conn->close();
