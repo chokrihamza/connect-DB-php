@@ -44,11 +44,17 @@ if (mysqli_query($conn, $sql)) {
   echo "Error creating table: " . mysqli_error($conn);
 }
 // insert data into table 
-$sql = "INSERT INTO MyGuests (firstname, lastname, email)
-VALUES ('John', 'Doe', 'john@example.com')";
+// $sql = "INSERT INTO MyGuests (firstname, lastname, email)
+// VALUES ('John', 'Doe', 'john@example.com')";
 
-if (mysqli_query($conn, $sql)) {
-  echo "New record created successfully";
+$sql = "INSERT INTO MyGuests (firstname, lastname, email)
+VALUES ('John', 'Doe', 'john@example.com');";
+$sql .= "INSERT INTO MyGuests (firstname, lastname, email)
+VALUES ('Mary', 'Moe', 'mary@example.com');";
+$sql .= "INSERT INTO MyGuests (firstname, lastname, email)
+VALUES ('Julie', 'Dooley', 'julie@example.com')";
+if (mysqli_multi_query($conn, $sql)) {
+  echo "New records created successfully";
   $last_id = mysqli_insert_id($conn);
   echo "New record created successfully. Last inserted ID is: " . $last_id;
 } else {

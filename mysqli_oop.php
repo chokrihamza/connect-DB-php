@@ -45,14 +45,21 @@ if ($conn->query($sql) === true) {
 
 //insert data to mysql using mysqli and pdo
 
-$sql = "INSERT INTO connect.MyGuests(firstname,lastname,email)";
-$sql .= " VALUES ('jhon','doe','jhondoe0123@gmail.com') ";
+$sql = "INSERT INTO connect.MyGuests(firstname,lastname,email)
+ VALUES ('jhon','doe','jhondoe0123@gmail.com');";
+$sql .= "INSERT INTO connect.MyGuests(firstname,lastname,email)
+ VALUES ('alex','smith','alexsmith0123@gmail.com');";
+$sql .= "INSERT INTO connect.MyGuests(firstname,lastname,email)
+ VALUES ('ameelka','smirnova','ameelkasmirnova@gmail.com')";
 
-if ($conn->query($sql) === TRUE) {
+// isert multiple data
+/*$conn->query($sql) === TRUE*/
+if ($conn->multi_query($sql) === true) {
   //  get id of the last inserted id
-  echo "New record created successfully";
-  $last_id = $conn->insert_id;
-  echo "the last inserted id is:  $last_id";
+  echo "New records created successfully";
+  $last_insert_id = $conn->insert_id;
+  echo "the last insert id : $last_insert_id";
+  
 } else {
   echo "Error" . $sql . "</br>" . $conn->error;
 }
